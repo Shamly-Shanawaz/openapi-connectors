@@ -8861,8 +8861,8 @@ components:
             [See more information about frequency and presence penalties.](/docs/guides/text-generation/parameter-details)
         seed:
           type: integer
-          minimum: -9223372036854776000
-          maximum: 9223372036854776000
+          minimum: -9223372036854775807
+          maximum: 9223372036854775807
           nullable: true
           description: |
             If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result.
@@ -9711,8 +9711,8 @@ components:
           x-oaiExpandable: true
         seed:
           type: integer
-          minimum: -9223372036854776000
-          maximum: 9223372036854776000
+          minimum: -9223372036854775807
+          maximum: 9223372036854775807
           nullable: true
           description: |
             This feature is in Beta.
