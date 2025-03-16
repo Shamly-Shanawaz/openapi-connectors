@@ -13,10 +13,7 @@ info:
     Create a [Facebook account](https://facebook.com/) and obtain tokens by following [this guide](https://developers.facebook.com/docs/marketing-apis/overview/authentication).
   x-ballerina-display:
     label: Facebook Ads
-    iconPath: "icon.png" 
-  x-marketplace-tags:
-    - name: Featured
-      description: Featured APIs are hand-picked for display purposes.
+    iconPath: "icon.png"
 servers:
   - url: https://graph.facebook.com/v12.0
 tags: 
