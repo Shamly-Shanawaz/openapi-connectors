@@ -4,9 +4,6 @@ info:
     CoinGecko API offers the most comprehensive and reliable crypto market data through RESTful JSON endpoints.
   version: 3.1.0
   title: CoinGecko Public API V3
-  x-marketplace-tags:
-    - name: Featured
-      description: Featured APIs are hand-picked for display purposes.
 servers:
   - url: 'https://api.coingecko.com/api/v3'
 security:
