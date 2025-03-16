@@ -1005,12 +1005,21 @@ components:
                   subscription_tracking:
                     enable: false
   securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
+    # TODO: (lahirude@wso2.com) Remove this temporary hack once the security scheme isuse is
+    # fixed in the Bijira Marketplace.
+    # BearerAuth:
+    #   type: http
+    #   scheme: bearer
+    #   description: Twilio SendGrid requires you to authenticate with its APIs using
+    #     an API key. The API key must be sent as a bearer token in the Authorization
+    #     header.
+    Apikey:
+      type: apiKey
       description: Twilio SendGrid requires you to authenticate with its APIs using
         an API key. The API key must be sent as a bearer token in the Authorization
         header.
+      name: Authorization
+      in: header
 tags:
 - name: Mail Send
   description: Twilio Mail Send API.
