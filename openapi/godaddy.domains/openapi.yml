@@ -15,10 +15,7 @@ info:
   x-ballerina-init-description: >-
     The connector initialization requires setting the API credentials.  Create a
     [GoDaddy](https://sg.godaddy.com/) and obtain tokens by following [this
-    guide](https://developer.godaddy.com/getstarted).
-  x-marketplace-tags:
-    - name: Featured
-      description: Featured APIs are hand-picked for display purposes.  
+    guide](https://developer.godaddy.com/getstarted). 
 tags:
   - name: v1
     description: ''

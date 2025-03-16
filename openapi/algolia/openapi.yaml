@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Search API
+  title: Algolia Search API
   description: >
     The Algolia Search API lets you search, configure, and manage your indices
     and records.

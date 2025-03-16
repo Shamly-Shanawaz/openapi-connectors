@@ -3,7 +3,7 @@ info:
   x-ballerina-display:
     label: Cloudmersive Currency
     iconPath: "icon.png"
-  title: currencyapi
+  title: Currency API
   description: This is a generated connector from [Cloudmersive](https://account.cloudmersive.com) OpenAPI specification.
   
     The Cloudmersive Currency APIs help you retrieve exchange rates and convert prices between currencies.
