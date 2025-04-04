@@ -21,9 +21,6 @@ info:
   version: 1.0.0
   x-sendgrid:
     libraryPackage: mail
-  x-marketplace-tags:
-    - name: Featured
-      description: Featured APIs are hand-picked for display purposes.
 servers:
 - url: https://api.sendgrid.com
   description: for global users and subusers

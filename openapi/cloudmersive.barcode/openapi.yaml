@@ -11,9 +11,6 @@ info:
     The connector initialization requires setting the API credentials.
     
     Create a [Cloudmersive account](https://account.cloudmersive.com/login) and obtain tokens following [this guide](https://account.cloudmersive.com/keys).
-  x-marketplace-tags:
-    - name: Featured
-      description: Featured APIs are hand-picked for display purposes.
   version: v1
 servers:
 - url: https://testapi.cloudmersive.com/
