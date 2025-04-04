@@ -29,6 +29,9 @@ info:
   license:
     name: MIT
     url: 'https://github.com/PandaDoc/pandadoc-openapi-specification/blob/main/LICENSE'
+  x-marketplace-tags:
+    - name: Featured
+      description: Featured APIs are hand-picked for display purposes.
   version: 7.4.0
 servers:
   - url: 'https://api.pandadoc.com'

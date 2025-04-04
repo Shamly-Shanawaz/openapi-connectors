@@ -13,6 +13,9 @@ info:
   x-ballerina-display:
     label: Shortcut
     iconPath: "icon.png"
+  x-marketplace-tags:
+    - name: Featured
+      description: Featured APIs are hand-picked for display purposes.
   version: "3.0"
 servers:
 - url: https://api.app.shortcut.com/

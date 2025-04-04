@@ -26,6 +26,9 @@ info:
     please reach out to us via [this form](https://stabilityplatform.freshdesk.com/support/tickets/new).
 
     To see the health of our APIs, please check our [Status Page](https://stabilityai.instatus.com/).
+  x-marketplace-tags:
+    - name: Featured
+      description: Featured APIs are hand-picked for display purposes.
 servers:
   - url: https://api.stability.ai
 security:
