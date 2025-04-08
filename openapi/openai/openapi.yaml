@@ -9711,8 +9711,8 @@ components:
           x-oaiExpandable: true
         seed:
           type: integer
-          minimum: -9223372036854775807
-          maximum: 9223372036854775807
+          minimum: -9007199254740991
+          maximum: 9007199254740991
           nullable: true
           description: |
             This feature is in Beta.
