@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: AWS Bedrock Converse API
+  title: AWS Bedrock API
   description: |-
     This OpenAPI specification defines the RESTful API for Amazon Bedrock's `converse` and `converseStream` operations.
     It provides a unified interface for interacting with various foundation models, supporting multi-turn conversations,
