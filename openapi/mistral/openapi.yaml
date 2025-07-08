@@ -2593,11 +2593,9 @@ components:
           title: Total Tokens
           type: integer
         connector_tokens:
-          default: null
           title: Connector Tokens
           type: integer
         connectors:
-          default: null
           title: Connectors
           additionalProperties:
             type: integer
@@ -2765,11 +2763,9 @@ components:
           title: Content Index
           type: integer
         model:
-          default: null
           title: Model
           type: string
         agent_id:
-          default: null
           title: Agent Id
           type: string
         role:
@@ -2994,26 +2990,21 @@ components:
         inputs:
           $ref: '#/components/schemas/ConversationInputs'
         stream:
-          default: null
           title: Stream
           type: boolean
         store:
-          default: null
           title: Store
           type: boolean
         handoff_execution:
-          default: null
           title: Handoff Execution
           enum:
             - client
             - server
           type: string
         instructions:
-          default: null
           title: Instructions
           type: string
         tools:
-          default: null
           title: Tools
           items:
             discriminator:
@@ -3034,22 +3025,17 @@ components:
               - $ref: '#/components/schemas/DocumentLibraryTool'
           type: array
         completion_args:
-          default: null
           $ref: '#/components/schemas/CompletionArgs'
         name:
-          default: null
           title: Name
           type: string
         description:
-          default: null
           title: Description
           type: string
         agent_id:
-          default: null
           title: Agent Id
           type: string
         model:
-          default: null
           title: Model
           type: string
       required:
