@@ -49,6 +49,14 @@ components:
             - 'interleaved-thinking-2025-05-14'
             - 'files-api-2025-04-14'
 
+    AnthropicDangerousDirectBrowserAccessHeader:
+      in: header
+      name: anthropic-dangerous-direct-browser-access
+      description: Required header to enable direct browser access for web search tools. This is a dangerous feature that allows the model to access the internet directly, which can lead to unexpected behavior. Use with caution.
+      required: false
+      schema:
+        type: boolean
+
     BeforeId:
       name: before_id
       in: query
@@ -2118,6 +2126,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
         - $ref: '#/components/parameters/AnthropicBetaHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       requestBody:
         required: true
         content:
@@ -2200,6 +2209,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
         - $ref: '#/components/parameters/AnthropicBetaHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       requestBody:
         required: true
         content:
@@ -2270,6 +2280,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BeforeId'
         - $ref: '#/components/parameters/AfterId'
         - $ref: '#/components/parameters/Limit'
@@ -2329,6 +2340,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - name: model_id
           in: path
           required: true
@@ -2375,6 +2387,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
         - $ref: '#/components/parameters/AnthropicBetaHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       requestBody:
         required: true
         content:
@@ -2472,6 +2485,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BeforeId'
         - $ref: '#/components/parameters/AfterId'
         - $ref: '#/components/parameters/Limit'
@@ -2535,6 +2549,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BatchId'
       responses:
         '200':
@@ -2574,6 +2589,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BatchId'
       responses:
         '200':
@@ -2623,6 +2639,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BatchId'
       responses:
         '200':
@@ -2677,6 +2694,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BatchId'
       responses:
         '200':
@@ -2718,6 +2736,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/AnthropicBetaHeader'
       requestBody:
         required: true
@@ -2772,6 +2791,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
         - $ref: '#/components/parameters/AnthropicBetaHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BeforeId'
         - $ref: '#/components/parameters/AfterId'
         - $ref: '#/components/parameters/Limit'
@@ -2829,6 +2849,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
         - $ref: '#/components/parameters/AnthropicBetaHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/FileId'
       responses:
         '200':
@@ -2870,6 +2891,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
         - $ref: '#/components/parameters/AnthropicBetaHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/FileId'
       responses:
         '200':
@@ -2921,6 +2943,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
         - $ref: '#/components/parameters/AnthropicBetaHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/FileId'
       responses:
         '200':
@@ -2963,6 +2986,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BeforeId'
         - $ref: '#/components/parameters/AfterId'
         - $ref: '#/components/parameters/Limit'
@@ -3027,6 +3051,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/UserId'
       responses:
         '200':
@@ -3067,6 +3092,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/UserId'
       requestBody:
         required: true
@@ -3120,6 +3146,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/UserId'
       responses:
         '200':
@@ -3173,6 +3200,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BeforeId'
         - $ref: '#/components/parameters/AfterId'
         - $ref: '#/components/parameters/Limit'
@@ -3286,6 +3314,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/InviteId'
       responses:
         '200':
@@ -3326,6 +3355,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/InviteId'
       responses:
         '200':
@@ -3379,6 +3409,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - name: include_archived
           in: query
           schema:
@@ -3495,6 +3526,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/WorkspaceId'
       responses:
         '200':
@@ -3535,6 +3567,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
         required: true
@@ -3590,6 +3623,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/WorkspaceId'
       responses:
         '200':
@@ -3631,6 +3665,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/WorkspaceId'
         - $ref: '#/components/parameters/BeforeId'
         - $ref: '#/components/parameters/AfterId'
@@ -3690,6 +3725,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
         required: true
@@ -3748,6 +3784,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/WorkspaceId'
         - $ref: '#/components/parameters/UserId'
       responses:
@@ -3789,6 +3826,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/WorkspaceId'
         - $ref: '#/components/parameters/UserId'
       requestBody:
@@ -3843,6 +3881,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/WorkspaceId'
         - $ref: '#/components/parameters/UserId'
       responses:
@@ -3901,6 +3940,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BeforeId'
         - $ref: '#/components/parameters/AfterId'
         - $ref: '#/components/parameters/Limit'
@@ -3979,6 +4019,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/ApiKeyId'
       responses:
         '200':
@@ -4019,6 +4060,7 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/ApiKeyId'
       requestBody:
         required: true
