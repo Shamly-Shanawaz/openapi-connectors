@@ -2,6 +2,9 @@ openapi: 3.0.0
 info:
   title: Anthropic Claude API
   version: 1.0.0
+  description: |
+    The Anthropic Claude API provides access to Claude, a family of large language models capable of performing a wide range of natural language processing tasks including chat completion, tool use, code execution, and document analysis. 
+    The API supports both real-time and batch interactions, with advanced configuration options for tool usage, streaming, caching, and system-level reasoning.
   x-marketplace-tags:
     - name: AI
       description: AI and LLM APIs
