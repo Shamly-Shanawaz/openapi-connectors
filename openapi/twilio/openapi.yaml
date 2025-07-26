@@ -31,7 +31,7 @@ components:
     accountSid_authToken:
       scheme: basic
       type: http
-      
+
   schemas:
     # Common error response
     RestException:
@@ -865,9 +865,240 @@ components:
           nullable: true
           description: The links to related resources
 
+    # IncomingPhoneNumber Schema
+    IncomingPhoneNumber:
+      type: object
+      properties:
+        account_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Account that created the IncomingPhoneNumber resource
+        address_requirements:
+          type: string
+          enum:
+            - none
+            - any
+            - local
+            - foreign
+          nullable: true
+          description: Whether the phone number requires an Address registered with Twilio
+        address_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^AD[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Address resource associated with the phone number
+        api_version:
+          type: string
+          nullable: true
+          description: The API version used to start a new TwiML session
+        beta:
+          type: boolean
+          nullable: true
+          description: Whether the phone number is new to the Twilio platform
+        capabilities:
+          type: object
+          properties:
+            voice:
+              type: boolean
+              nullable: true
+              description: Whether the phone number can receive voice calls
+            sms:
+              type: boolean
+              nullable: true
+              description: Whether the phone number can receive SMS messages
+            mms:
+              type: boolean
+              nullable: true
+              description: Whether the phone number can receive MMS messages
+            fax:
+              type: boolean
+              nullable: true
+              description: Whether the phone number can receive faxes
+          nullable: true
+          description: The set of Boolean properties that indicate whether a phone number can receive calls or messages
+        date_created:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time in GMT that the resource was created
+        date_updated:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time in GMT that the resource was last updated
+        friendly_name:
+          type: string
+          nullable: true
+          description: The string that you assigned to describe the resource
+        identity_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^RI[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Identity resource associated with the phone number
+        phone_number:
+          type: string
+          format: phone-number
+          nullable: true
+          description: The phone number in E.164 format
+        origin:
+          type: string
+          nullable: true
+          description: The phone number's origin
+        sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^PN[0-9a-fA-F]{32}$
+          nullable: true
+          description: The unique string that identifies the resource
+        sms_application_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^AP[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the application that handles SMS messages sent to the phone number
+        sms_fallback_method:
+          type: string
+          format: http-method
+          enum:
+            - GET
+            - POST
+          nullable: true
+          description: The HTTP method we use to call sms_fallback_url
+        sms_fallback_url:
+          type: string
+          format: uri
+          nullable: true
+          description: The URL that we call when an error occurs while retrieving or executing the TwiML
+        sms_method:
+          type: string
+          format: http-method
+          enum:
+            - GET
+            - POST
+          nullable: true
+          description: The HTTP method we use to call sms_url
+        sms_url:
+          type: string
+          format: uri
+          nullable: true
+          description: The URL we call when the phone number receives an incoming SMS message
+        status_callback:
+          type: string
+          format: uri
+          nullable: true
+          description: The URL we call using the status_callback_method
+        status_callback_method:
+          type: string
+          format: http-method
+          enum:
+            - GET
+            - POST
+          nullable: true
+          description: The HTTP method we use to call status_callback
+        trunk_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^TK[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Trunk that handles calls to the phone number
+        uri:
+          type: string
+          nullable: true
+          description: The URI of the resource relative to https://api.twilio.com
+        voice_application_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^AP[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the application that handles calls to the phone number
+        voice_caller_id_lookup:
+          type: boolean
+          nullable: true
+          description: Whether we look up the caller's caller-ID name from the CNAM database
+        voice_fallback_method:
+          type: string
+          format: http-method
+          enum:
+            - GET
+            - POST
+          nullable: true
+          description: The HTTP method we use to call voice_fallback_url
+        voice_fallback_url:
+          type: string
+          format: uri
+          nullable: true
+          description: The URL that we call when an error occurs retrieving or executing the TwiML
+        voice_method:
+          type: string
+          format: http-method
+          enum:
+            - GET
+            - POST
+          nullable: true
+          description: The HTTP method we use to call voice_url
+        voice_url:
+          type: string
+          format: uri
+          nullable: true
+          description: The URL we call when the phone number receives a call
+        emergency_status:
+          type: string
+          enum:
+            - Active
+            - Inactive
+          nullable: true
+          description: Whether emergency calling is enabled for this number
+        emergency_address_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^AD[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the emergency address configuration
+        emergency_address_status:
+          type: string
+          enum:
+            - registered
+            - unregistered
+            - pending-registration
+            - registration-failure
+            - pending-unregistration
+            - unregistration-failure
+          nullable: true
+          description: The status of address registration with emergency services
+        bundle_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^BU[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Bundle resource associated with the phone number
+        voice_receive_mode:
+          type: string
+          enum:
+            - voice
+            - fax
+          nullable: true
+          description: The configuration parameter for the phone number to receive voice calls or faxes
+        status:
+          type: string
+          nullable: true
+          description: The status of the phone number
+
 security:
   - accountSid_authToken: []
-          
+
 paths:
   # Core API - Account Management
   /2010-04-01/Accounts.json:
@@ -1261,6 +1492,445 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Call'
+
+  # Core API - Incoming Phone Numbers
+  /2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers.json:
+    servers:
+      - url: https://api.twilio.com
+    get:
+      operationId: ListIncomingPhoneNumber
+      summary: List incoming phone numbers
+      description: Retrieve a list of incoming phone numbers belonging to the account
+      tags:
+        - Incoming Phone Numbers
+      parameters:
+        - name: AccountSid
+          in: path
+          description: The SID of the Account that created the IncomingPhoneNumber resources to read
+          required: true
+          schema:
+            type: string
+            minLength: 34
+            maxLength: 34
+            pattern: ^AC[0-9a-fA-F]{32}$
+        - name: Beta
+          in: query
+          description: Whether to include phone numbers new to the Twilio platform
+          schema:
+            type: boolean
+        - name: FriendlyName
+          in: query
+          description: A string that identifies the IncomingPhoneNumber resources to read
+          schema:
+            type: string
+        - name: PhoneNumber
+          in: query
+          description: The phone numbers of the IncomingPhoneNumber resources to read
+          schema:
+            type: string
+            format: phone-number
+        - name: Origin
+          in: query
+          description: Whether to include phone numbers based on their origin
+          schema:
+            type: string
+        - name: PageSize
+          in: query
+          description: How many resources to return in each list page
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  incoming_phone_numbers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/IncomingPhoneNumber'
+                  first_page_uri:
+                    type: string
+                    format: uri
+                  next_page_uri:
+                    type: string
+                    format: uri
+                    nullable: true
+                  page:
+                    type: integer
+                  page_size:
+                    type: integer
+                  previous_page_uri:
+                    type: string
+                    format: uri
+                    nullable: true
+                  uri:
+                    type: string
+                    format: uri
+      security:
+        - accountSid_authToken: []
+    post:
+      operationId: CreateIncomingPhoneNumber
+      summary: Purchase phone number
+      description: Purchase a phone number for the account
+      tags:
+        - Incoming Phone Numbers
+      parameters:
+        - name: AccountSid
+          in: path
+          description: The SID of the Account that will create the resource
+          required: true
+          schema:
+            type: string
+            minLength: 34
+            maxLength: 34
+            pattern: ^AC[0-9a-fA-F]{32}$
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                PhoneNumber:
+                  type: string
+                  format: phone-number
+                  description: The phone number to purchase specified in E.164 format
+                AreaCode:
+                  type: string
+                  description: The desired area code for your new incoming phone number
+                FriendlyName:
+                  type: string
+                  description: A descriptive string that you created to describe the new phone number
+                ApiVersion:
+                  type: string
+                  description: The API version to use for incoming calls made to the new phone number
+                VoiceUrl:
+                  type: string
+                  format: uri
+                  description: The URL that we should call to answer a call to the new phone number
+                VoiceMethod:
+                  type: string
+                  format: http-method
+                  enum:
+                    - GET
+                    - POST
+                  description: The HTTP method that we should use to call voice_url
+                VoiceFallbackUrl:
+                  type: string
+                  format: uri
+                  description: The URL that we should call when an error occurs retrieving or executing the TwiML
+                VoiceFallbackMethod:
+                  type: string
+                  format: http-method
+                  enum:
+                    - GET
+                    - POST
+                  description: The HTTP method that we should use to call voice_fallback_url
+                SmsUrl:
+                  type: string
+                  format: uri
+                  description: The URL we should call when the new phone number receives an incoming SMS message
+                SmsMethod:
+                  type: string
+                  format: http-method
+                  enum:
+                    - GET
+                    - POST
+                  description: The HTTP method that we should use to call sms_url
+                SmsFallbackUrl:
+                  type: string
+                  format: uri
+                  description: The URL that we should call when an error occurs while requesting or executing the TwiML
+                SmsFallbackMethod:
+                  type: string
+                  format: http-method
+                  enum:
+                    - GET
+                    - POST
+                  description: The HTTP method that we should use to call sms_fallback_url
+                StatusCallback:
+                  type: string
+                  format: uri
+                  description: The URL we should call using the status_callback_method to send status information
+                StatusCallbackMethod:
+                  type: string
+                  format: http-method
+                  enum:
+                    - GET
+                    - POST
+                  description: The HTTP method we should use to call status_callback
+                VoiceApplicationSid:
+                  type: string
+                  minLength: 34
+                  maxLength: 34
+                  pattern: ^AP[0-9a-fA-F]{32}$
+                  description: The SID of the application we should use to handle calls to the new phone number
+                SmsApplicationSid:
+                  type: string
+                  minLength: 34
+                  maxLength: 34
+                  pattern: ^AP[0-9a-fA-F]{32}$
+                  description: The SID of the application that should handle SMS messages sent to the new phone number
+                TrunkSid:
+                  type: string
+                  minLength: 34
+                  maxLength: 34
+                  pattern: ^TK[0-9a-fA-F]{32}$
+                  description: The SID of the Trunk we should use to handle calls to the new phone number
+                VoiceCallerIdLookup:
+                  type: boolean
+                  description: Whether to lookup the caller's name from the CNAM database
+                AddressSid:
+                  type: string
+                  minLength: 34
+                  maxLength: 34
+                  pattern: ^AD[0-9a-fA-F]{32}$
+                  description: The SID of the Address resource we should associate with the new phone number
+                EmergencyStatus:
+                  type: string
+                  enum:
+                    - Active
+                    - Inactive
+                  description: The parameter displays if emergency calling is enabled for this number
+                EmergencyAddressSid:
+                  type: string
+                  minLength: 34
+                  maxLength: 34
+                  pattern: ^AD[0-9a-fA-F]{32}$
+                  description: The SID of the emergency address configuration to use for emergency calling
+                BundleSid:
+                  type: string
+                  minLength: 34
+                  maxLength: 34
+                  pattern: ^BU[0-9a-fA-F]{32}$
+                  description: The SID of the Bundle resource that you associate with the phone number
+                IdentitySid:
+                  type: string
+                  minLength: 34
+                  maxLength: 34
+                  pattern: ^RI[0-9a-fA-F]{32}$
+                  description: The SID of the Identity resource that we should associate with the new phone number
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomingPhoneNumber'
+      security:
+        - accountSid_authToken: []
+
+  /2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{Sid}.json:
+    servers:
+      - url: https://api.twilio.com
+    get:
+      operationId: FetchIncomingPhoneNumber
+      summary: Fetch incoming phone number
+      description: Fetch an incoming phone number belonging to the account used to make the request
+      tags:
+        - Incoming Phone Numbers
+      parameters:
+        - name: AccountSid
+          in: path
+          description: The SID of the Account that created the IncomingPhoneNumber resource to fetch
+          required: true
+          schema:
+            type: string
+            minLength: 34
+            maxLength: 34
+            pattern: ^AC[0-9a-fA-F]{32}$
+        - name: Sid
+          in: path
+          description: The Twilio-provided string that uniquely identifies the IncomingPhoneNumber resource to fetch
+          required: true
+          schema:
+            type: string
+            minLength: 34
+            maxLength: 34
+            pattern: ^PN[0-9a-fA-F]{32}$
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomingPhoneNumber'
+      security:
+        - accountSid_authToken: []
+    post:
+      operationId: UpdateIncomingPhoneNumber
+      summary: Update incoming phone number
+      description: Update an incoming phone number instance
+      tags:
+        - Incoming Phone Numbers
+      parameters:
+        - name: AccountSid
+          in: path
+          description: The SID of the Account that created the IncomingPhoneNumber resource to update
+          required: true
+          schema:
+            type: string
+            minLength: 34
+            maxLength: 34
+            pattern: ^AC[0-9a-fA-F]{32}$
+        - name: Sid
+          in: path
+          description: The Twilio-provided string that uniquely identifies the IncomingPhoneNumber resource to update
+          required: true
+          schema:
+            type: string
+            minLength: 34
+            maxLength: 34
+            pattern: ^PN[0-9a-fA-F]{32}$
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                AccountSid:
+                  type: string
+                  minLength: 34
+                  maxLength: 34
+                  pattern: ^AC[0-9a-fA-F]{32}$
+                  description: The SID of the Account that created the resource
+                FriendlyName:
+                  type: string
+                  description: A descriptive string that you created
+                ApiVersion:
+                  type: string
+                  description: The API version to use for incoming calls
+                VoiceUrl:
+                  type: string
+                  format: uri
+                  description: The URL we should call to answer a call
+                VoiceMethod:
+                  type: string
+                  format: http-method
+                  enum:
+                    - GET
+                    - POST
+                  description: The HTTP method we should use to call voice_url
+                VoiceFallbackUrl:
+                  type: string
+                  format: uri
+                  description: The URL that we should call when an error occurs
+                VoiceFallbackMethod:
+                  type: string
+                  format: http-method
+                  enum:
+                    - GET
+                    - POST
+                  description: The HTTP method we should use to call voice_fallback_url
+                SmsUrl:
+                  type: string
+                  format: uri
+                  description: The URL we should call when receiving an SMS
+                SmsMethod:
+                  type: string
+                  format: http-method
+                  enum:
+                    - GET
+                    - POST
+                  description: The HTTP method we should use to call sms_url
+                SmsFallbackUrl:
+                  type: string
+                  format: uri
+                  description: The URL that we should call when an SMS error occurs
+                SmsFallbackMethod:
+                  type: string
+                  format: http-method
+                  enum:
+                    - GET
+                    - POST
+                  description: The HTTP method we should use to call sms_fallback_url
+                StatusCallback:
+                  type: string
+                  format: uri
+                  description: The URL we should call to send status information
+                StatusCallbackMethod:
+                  type: string
+                  format: http-method
+                  enum:
+                    - GET
+                    - POST
+                  description: The HTTP method we should use to call status_callback
+                VoiceApplicationSid:
+                  type: string
+                  minLength: 34
+                  maxLength: 34
+                  pattern: ^AP[0-9a-fA-F]{32}$
+                  description: The SID of the application to handle calls
+                SmsApplicationSid:
+                  type: string
+                  minLength: 34
+                  maxLength: 34
+                  pattern: ^AP[0-9a-fA-F]{32}$
+                  description: The SID of the application to handle SMS messages
+                TrunkSid:
+                  type: string
+                  minLength: 34
+                  maxLength: 34
+                  pattern: ^TK[0-9a-fA-F]{32}$
+                  description: The SID of the Trunk to handle calls
+                VoiceCallerIdLookup:
+                  type: boolean
+                  description: Whether to lookup the caller's name
+                EmergencyStatus:
+                  type: string
+                  enum:
+                    - Active
+                    - Inactive
+                  description: Whether emergency calling is enabled
+                EmergencyAddressSid:
+                  type: string
+                  minLength: 34
+                  maxLength: 34
+                  pattern: ^AD[0-9a-fA-F]{32}$
+                  description: The SID of the emergency address configuration
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomingPhoneNumber'
+      security:
+        - accountSid_authToken: []
+    delete:
+      operationId: DeleteIncomingPhoneNumber
+      summary: Delete incoming phone number
+      description: Delete a phone number belonging to the account used to make the request
+      tags:
+        - Incoming Phone Numbers
+      parameters:
+        - name: AccountSid
+          in: path
+          description: The SID of the Account that created the IncomingPhoneNumber resources to delete
+          required: true
+          schema:
+            type: string
+            minLength: 34
+            maxLength: 34
+            pattern: ^AC[0-9a-fA-F]{32}$
+        - name: Sid
+          in: path
+          description: The Twilio-provided string that uniquely identifies the IncomingPhoneNumber resource to delete
+          required: true
+          schema:
+            type: string
+            minLength: 34
+            maxLength: 34
+            pattern: ^PN[0-9a-fA-F]{32}$
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+        - accountSid_authToken: []
 
   # Verify API - Services
   /v2/Services.json:
@@ -1676,6 +2346,8 @@ tags:
     description: SMS and MMS messaging
   - name: Calls
     description: Voice calls
+  - name: Incoming Phone Numbers
+    description: Phone number management and configuration
   - name: Verify Services
     description: Phone number verification services
   - name: Verifications
