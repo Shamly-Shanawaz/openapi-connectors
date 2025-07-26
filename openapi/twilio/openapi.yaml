@@ -1,0 +1,1690 @@
+openapi: 3.0.1
+info:
+  title: Twilio REST API
+  description: OpenAPI specification for the Twilio REST APIs including Core API, Messaging, Voice, Verify, Conversations, and Lookups services.
+  termsOfService: https://www.twilio.com/legal/tos
+  contact:
+    name: Twilio Support
+    url: https://support.twilio.com
+    email: support@twilio.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 2.4.0
+
+servers:
+  - url: https://api.twilio.com
+    description: Core Twilio API
+  - url: https://messaging.twilio.com
+    description: Twilio Messaging API
+  - url: https://voice.twilio.com
+    description: Twilio Voice API
+  - url: https://verify.twilio.com
+    description: Twilio Verify API
+  - url: https://conversations.twilio.com
+    description: Twilio Conversations API
+  - url: https://lookups.twilio.com
+    description: Twilio Lookups API
+
+components:
+  securitySchemes:
+    accountSid_authToken:
+      scheme: basic
+      type: http
+      
+  schemas:
+    # Common error response
+    RestException:
+      type: object
+      properties:
+        code:
+          type: integer
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        more_info:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          nullable: true
+
+    # Account Schema
+    Account:
+      type: object
+      properties:
+        auth_token:
+          type: string
+          nullable: true
+          description: The authorization token for this account
+        date_created:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date that this account was created
+        date_updated:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date that this account was last updated
+        friendly_name:
+          type: string
+          nullable: true
+          description: A human readable description of this account
+        owner_account_sid:
+          type: string
+          nullable: true
+          description: The unique 34 character id that represents the parent of this account
+        sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          nullable: true
+          description: The unique 34 character id of the Account resource
+        status:
+          type: string
+          enum:
+            - active
+            - suspended
+            - closed
+          nullable: true
+          description: The status of this account
+        type:
+          type: string
+          enum:
+            - Trial
+            - Full
+          nullable: true
+          description: The type of this account
+        uri:
+          type: string
+          nullable: true
+          description: The URI of this resource
+        subresource_uris:
+          type: object
+          nullable: true
+          description: A list of the Account resource's subresources and their URI path
+
+    # Message Schema
+    Message:
+      type: object
+      properties:
+        account_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Account that created the Message resource
+        api_version:
+          type: string
+          nullable: true
+          description: The API version used to process the message
+        body:
+          type: string
+          nullable: true
+          description: The message text
+        date_created:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time in GMT that the resource was created
+        date_sent:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time in GMT that the message was sent
+        date_updated:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time in GMT that the resource was last updated
+        direction:
+          type: string
+          enum:
+            - inbound
+            - outbound-api
+            - outbound-call
+            - outbound-reply
+          nullable: true
+          description: The direction of the message
+        error_code:
+          type: integer
+          nullable: true
+          description: The error code returned if the message status is failed or undelivered
+        error_message:
+          type: string
+          nullable: true
+          description: The description of the error_code if the message status is failed or undelivered
+        from:
+          type: string
+          nullable: true
+          description: The phone number or Channel address that initiated the message
+        messaging_service_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^MG[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Messaging Service used with the message
+        num_media:
+          type: string
+          nullable: true
+          description: The number of associated media files
+        num_segments:
+          type: string
+          nullable: true
+          description: The number of segments that make up the complete message
+        price:
+          type: string
+          nullable: true
+          description: The amount billed for the message
+        price_unit:
+          type: string
+          nullable: true
+          description: The currency in which price is measured
+        sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^MM[0-9a-fA-F]{32}$
+          nullable: true
+          description: The unique string that identifies the Message resource
+        status:
+          type: string
+          enum:
+            - accepted
+            - queued
+            - sending
+            - sent
+            - failed
+            - delivered
+            - undelivered
+            - receiving
+            - received
+            - read
+          nullable: true
+          description: The status of the message
+        subresource_uris:
+          type: object
+          nullable: true
+          description: A list of related resources identified by their relative URIs
+        to:
+          type: string
+          nullable: true
+          description: The phone number or Channel address that received the message
+        uri:
+          type: string
+          nullable: true
+          description: The URI of the Message resource
+
+    # Call Schema
+    Call:
+      type: object
+      properties:
+        account_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Account that created the Call resource
+        annotation:
+          type: string
+          nullable: true
+          description: The annotation provided for the Call
+        answered_by:
+          type: string
+          enum:
+            - human
+            - machine
+          nullable: true
+          description: Either human or machine if the call has been answered
+        api_version:
+          type: string
+          nullable: true
+          description: The API version used to create the Call
+        caller_name:
+          type: string
+          nullable: true
+          description: The caller's name if Caller ID is available
+        date_created:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time in GMT that the resource was created
+        date_updated:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time in GMT that the resource was last updated
+        direction:
+          type: string
+          enum:
+            - inbound
+            - outbound-api
+            - outbound-dial
+          nullable: true
+          description: A string describing the direction of the call
+        duration:
+          type: string
+          nullable: true
+          description: The length of the call in seconds
+        end_time:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time in GMT that the call ended
+        forwarded_from:
+          type: string
+          nullable: true
+          description: The forwarding phone number if the call was forwarded
+        from:
+          type: string
+          nullable: true
+          description: The phone number or client identifier that made the call
+        from_formatted:
+          type: string
+          nullable: true
+          description: The calling phone number formatted with national formatting
+        group_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^GP[0-9a-fA-F]{32}$
+          nullable: true
+          description: The Group SID associated with this call
+        parent_call_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^CA[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID that identifies the call's parent call
+        phone_number_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^PN[0-9a-fA-F]{32}$
+          nullable: true
+          description: If the call was inbound, this is the SID of the IncomingPhoneNumber resource
+        price:
+          type: string
+          nullable: true
+          description: The charge for the call in the currency associated with the account
+        price_unit:
+          type: string
+          nullable: true
+          description: The currency in which Price is measured
+        sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^CA[0-9a-fA-F]{32}$
+          nullable: true
+          description: The unique string that identifies the Call resource
+        start_time:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time in GMT that the call started
+        status:
+          type: string
+          enum:
+            - queued
+            - ringing
+            - in-progress
+            - canceled
+            - completed
+            - failed
+            - busy
+            - no-answer
+          nullable: true
+          description: The status of this call
+        subresource_uris:
+          type: object
+          nullable: true
+          description: A list of related resources identified by their relative URIs
+        to:
+          type: string
+          nullable: true
+          description: The phone number or client identifier that received the call
+        to_formatted:
+          type: string
+          nullable: true
+          description: The called phone number formatted with national formatting
+        trunk_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^TK[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Trunk resource used for the call
+        uri:
+          type: string
+          nullable: true
+          description: The URI of the Call resource
+
+    # Verify Service Schema
+    VerifyService:
+      type: object
+      properties:
+        sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^VA[0-9a-fA-F]{32}$
+          nullable: true
+          description: The unique string that identifies this Service resource
+        account_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Account that created the Service resource
+        friendly_name:
+          type: string
+          nullable: true
+          description: The string that you assigned to describe the verification service
+        code_length:
+          type: integer
+          nullable: true
+          description: The length of the verification code
+        lookup_enabled:
+          type: boolean
+          nullable: true
+          description: Whether to perform a lookup with each verification started from this service
+        psd2_enabled:
+          type: boolean
+          nullable: true
+          description: Whether to pass PSD2 transaction parameters when starting a verification
+        skip_sms_to_landlines:
+          type: boolean
+          nullable: true
+          description: Whether to skip sending SMS verifications to landlines
+        dtmf_input_required:
+          type: boolean
+          nullable: true
+          description: Whether to ask the user to press a number before delivering the verify code
+        tts_name:
+          type: string
+          nullable: true
+          description: The name of an alternative text-to-speech service to use in phone calls
+        mailer_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^MD[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Mailer used for this service
+        date_created:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time in GMT when the resource was created
+        date_updated:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time in GMT when the resource was last updated
+        url:
+          type: string
+          format: uri
+          nullable: true
+          description: The absolute URL of the resource
+        links:
+          type: object
+          nullable: true
+          description: The links to related resources
+
+    # Verification Schema
+    Verification:
+      type: object
+      properties:
+        sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^VE[0-9a-fA-F]{32}$
+          nullable: true
+          description: The unique string that identifies this Verification resource
+        service_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^VA[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Service that the resource is associated with
+        account_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Account that created the Verification resource
+        to:
+          type: string
+          nullable: true
+          description: The phone number or email being verified
+        channel:
+          type: string
+          enum:
+            - sms
+            - call
+            - email
+            - whatsapp
+          nullable: true
+          description: The verification method used
+        status:
+          type: string
+          enum:
+            - canceled
+            - approved
+            - pending
+            - max_attempts_reached
+          nullable: true
+          description: The status of the verification resource
+        valid:
+          type: boolean
+          nullable: true
+          description: Whether the verification was successful
+        date_created:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time in GMT when the resource was created
+        date_updated:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time in GMT when the resource was last updated
+        lookup:
+          type: object
+          nullable: true
+          description: Information about the phone number being verified
+        amount:
+          type: string
+          nullable: true
+          description: The amount of the associated PSD2 compliant transaction
+        payee:
+          type: string
+          nullable: true
+          description: The payee of the associated PSD2 compliant transaction
+        send_code_attempts:
+          type: array
+          items:
+            type: object
+          nullable: true
+          description: An array of verification attempt objects
+        sna:
+          type: object
+          nullable: true
+          description: Details provided by the Silent Network Auth Lookup
+        url:
+          type: string
+          format: uri
+          nullable: true
+          description: The absolute URL of the resource
+
+    # Verification Check Schema
+    VerificationCheck:
+      type: object
+      properties:
+        sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^VE[0-9a-fA-F]{32}$
+          nullable: true
+          description: The unique string that identifies this Verification Check resource
+        service_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^VA[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Service that the resource is associated with
+        account_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Account that created the VerificationCheck resource
+        to:
+          type: string
+          nullable: true
+          description: The phone number or email being verified
+        channel:
+          type: string
+          enum:
+            - sms
+            - call
+            - email
+            - whatsapp
+          nullable: true
+          description: The verification method used
+        status:
+          type: string
+          enum:
+            - canceled
+            - approved
+            - pending
+            - max_attempts_reached
+          nullable: true
+          description: The status of the verification resource
+        valid:
+          type: boolean
+          nullable: true
+          description: Whether the verification was successful
+        amount:
+          type: string
+          nullable: true
+          description: The amount of the associated PSD2 compliant transaction
+        payee:
+          type: string
+          nullable: true
+          description: The payee of the associated PSD2 compliant transaction
+        date_created:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time in GMT when the resource was created
+        date_updated:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time in GMT when the resource was last updated
+        sna_attempts_error_codes:
+          type: array
+          items:
+            type: object
+          nullable: true
+          description: List of errors that occurred during the SNA attempts
+
+    # Phone Number Lookup Schema
+    PhoneNumberLookup:
+      type: object
+      properties:
+        calling_country_code:
+          type: string
+          nullable: true
+          description: The ISO country code for the phone number
+        country_code:
+          type: string
+          nullable: true
+          description: The ISO country code for the phone number
+        phone_number:
+          type: string
+          nullable: true
+          description: The phone number in E.164 format
+        national_format:
+          type: string
+          nullable: true
+          description: The phone number in national format
+        valid:
+          type: boolean
+          nullable: true
+          description: Whether the phone number is valid
+        validation_errors:
+          type: array
+          items:
+            type: string
+          nullable: true
+          description: The validation errors for the phone number
+        caller_name:
+          type: object
+          nullable: true
+          description: The name of the phone number's owner
+        sim_swap:
+          type: object
+          nullable: true
+          description: Information about SIM swaps for the phone number
+        call_forwarding:
+          type: object
+          nullable: true
+          description: Information about call forwarding for the phone number
+        line_status:
+          type: object
+          nullable: true
+          description: Information about the line status of the phone number
+        line_type_intelligence:
+          type: object
+          nullable: true
+          description: Information about the line type of the phone number
+        identity_match:
+          type: object
+          nullable: true
+          description: Information about identity matching for the phone number
+        reassigned_number:
+          type: object
+          nullable: true
+          description: Information about whether the phone number has been reassigned
+        sms_pumping_risk:
+          type: object
+          nullable: true
+          description: Information about SMS pumping risk for the phone number
+        phone_number_quality_score:
+          type: object
+          nullable: true
+          description: Quality score information for the phone number
+        pre_fill:
+          type: object
+          nullable: true
+          description: Pre-fill information for the phone number
+        url:
+          type: string
+          format: uri
+          nullable: true
+          description: The absolute URL of the PhoneNumber resource
+
+    # Conversation Schema
+    Conversation:
+      type: object
+      properties:
+        account_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Account that created the Conversation resource
+        sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^CH[0-9a-fA-F]{32}$
+          nullable: true
+          description: The unique string that identifies the Conversation resource
+        friendly_name:
+          type: string
+          nullable: true
+          description: The human-readable name of this conversation
+        unique_name:
+          type: string
+          nullable: true
+          description: An application-defined string that uniquely identifies the resource
+        attributes:
+          type: string
+          nullable: true
+          description: The JSON string that stores application-specific data
+        messaging_service_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^MG[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Messaging Service used for this conversation
+        date_created:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date that this resource was created
+        date_updated:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date that this resource was last updated
+        state:
+          type: string
+          enum:
+            - inactive
+            - active
+            - closed
+          nullable: true
+          description: Current state of this conversation
+        timers:
+          type: object
+          nullable: true
+          description: Timer date values representing state-machine-driven conversation auto-changes
+        url:
+          type: string
+          format: uri
+          nullable: true
+          description: An absolute URL for this conversation
+        links:
+          type: object
+          nullable: true
+          description: Links to the conversation's nested resources
+
+    # Messaging Service Schema
+    MessagingService:
+      type: object
+      properties:
+        sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^MG[0-9a-fA-F]{32}$
+          nullable: true
+          description: The unique string that identifies this Service resource
+        account_sid:
+          type: string
+          minLength: 34
+          maxLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          nullable: true
+          description: The SID of the Account that created the Service resource
+        friendly_name:
+          type: string
+          nullable: true
+          description: The string that you assigned to describe the resource
+        date_created:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time in GMT when the resource was created
+        date_updated:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time in GMT when the resource was last updated
+        inbound_request_url:
+          type: string
+          format: uri
+          nullable: true
+          description: The URL that will receive inbound messages
+        inbound_method:
+          type: string
+          enum:
+            - HEAD
+            - GET
+            - POST
+            - PATCH
+            - PUT
+            - DELETE
+          nullable: true
+          description: The HTTP method to use for inbound messages
+        fallback_url:
+          type: string
+          format: uri
+          nullable: true
+          description: The URL that Twilio will request if InboundRequestUrl fails
+        fallback_method:
+          type: string
+          enum:
+            - HEAD
+            - GET
+            - POST
+            - PATCH
+            - PUT
+            - DELETE
+          nullable: true
+          description: The HTTP method to use for fallback requests to the fallback URL
+        status_callback:
+          type: string
+          format: uri
+          nullable: true
+          description: The URL that will receive status callbacks
+        sticky_sender:
+          type: boolean
+          nullable: true
+          description: Whether to enable Sticky Sender on the Service instance
+        mms_converter:
+          type: boolean
+          nullable: true
+          description: Whether to enable the MMS Converter for messages sent through the Service instance
+        smart_encoding:
+          type: boolean
+          nullable: true
+          description: Whether to enable Encoding for messages sent through the Service instance
+        scan_message_content:
+          type: string
+          enum:
+            - inherit
+            - enable
+            - disable
+          nullable: true
+          description: Whether to scan inbound messages for sensitive content
+        fallback_to_long_code:
+          type: boolean
+          nullable: true
+          description: Whether to enable Fallback to Long Code for messages sent through the Service instance
+        area_code_geomatch:
+          type: boolean
+          nullable: true
+          description: Whether to enable Area Code Geomatch on the Service Instance
+        validity_period:
+          type: integer
+          nullable: true
+          description: How long in seconds the service will keep messages
+        synchronous_validation:
+          type: boolean
+          nullable: true
+          description: Whether to enable Synchronous Validation on the Service Instance
+        url:
+          type: string
+          format: uri
+          nullable: true
+          description: The absolute URL of the Service resource
+        links:
+          type: object
+          nullable: true
+          description: The links to related resources
+
+security:
+  - accountSid_authToken: []
+          
+paths:
+  # Core API - Account Management
+  /2010-04-01/Accounts.json:
+    servers:
+      - url: https://api.twilio.com
+    get:
+      operationId: listAccounts
+      summary: List accounts
+      description: Retrieve a list of accounts
+      tags:
+        - Accounts
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accounts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Account'
+                  first_page_uri:
+                    type: string
+                  next_page_uri:
+                    type: string
+                  page:
+                    type: integer
+                  page_size:
+                    type: integer
+                  uri:
+                    type: string
+    post:
+      summary: Create subaccount
+      description: Create a new subaccount
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                FriendlyName:
+                  type: string
+                  description: A human readable description of the account
+              required:
+                - FriendlyName
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+
+  /2010-04-01/Accounts/{AccountSid}.json:
+    servers:
+      - url: https://api.twilio.com
+    get:
+      summary: Fetch account
+      description: Fetch the account specified by the provided Account SID
+      tags:
+        - Accounts
+      parameters:
+        - name: AccountSid
+          in: path
+          description: The SID of the Account resource to fetch
+          required: true
+          schema:
+            type: string
+            minLength: 34
+            maxLength: 34
+            pattern: ^AC[0-9a-fA-F]{32}$
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+
+  # Core API - Messages
+  /2010-04-01/Accounts/{AccountSid}/Messages.json:
+    servers:
+      - url: https://api.twilio.com
+    get:
+      summary: List messages
+      description: Retrieve a list of messages
+      tags:
+        - Messages
+      parameters:
+        - name: AccountSid
+          in: path
+          description: The SID of the Account that created the Message resources to read
+          required: true
+          schema:
+            type: string
+            minLength: 34
+            maxLength: 34
+            pattern: ^AC[0-9a-fA-F]{32}$
+        - name: To
+          in: query
+          description: Read messages sent to only this phone number
+          schema:
+            type: string
+        - name: From
+          in: query
+          description: Read messages sent from only this phone number or alphanumeric sender ID
+          schema:
+            type: string
+        - name: DateSent
+          in: query
+          description: The date of the messages to read
+          schema:
+            type: string
+            format: date
+        - name: PageSize
+          in: query
+          description: How many resources to return in each list page
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  messages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Message'
+                  first_page_uri:
+                    type: string
+                  next_page_uri:
+                    type: string
+                  page:
+                    type: integer
+                  page_size:
+                    type: integer
+                  uri:
+                    type: string
+    post:
+      summary: Create message
+      description: Send a message
+      tags:
+        - Messages
+      parameters:
+        - name: AccountSid
+          in: path
+          description: The SID of the Account that will create the resource
+          required: true
+          schema:
+            type: string
+            minLength: 34
+            maxLength: 34
+            pattern: ^AC[0-9a-fA-F]{32}$
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                To:
+                  type: string
+                  description: The destination phone number
+                From:
+                  type: string
+                  description: A Twilio phone number or alphanumeric sender ID
+                Body:
+                  type: string
+                  description: The text of the message
+                MediaUrl:
+                  type: array
+                  items:
+                    type: string
+                  description: The URL of the media to send with the message
+                StatusCallback:
+                  type: string
+                  format: uri
+                  description: The URL to send message status information
+                ApplicationSid:
+                  type: string
+                  description: The SID of the application that should receive message status webhooks
+                MaxPrice:
+                  type: number
+                  description: The total maximum price in US dollars acceptable for the message
+                ProvideFeedback:
+                  type: boolean
+                  description: Whether to confirm delivery of the message
+              required:
+                - To
+                - Body
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+
+  /2010-04-01/Accounts/{AccountSid}/Messages/{Sid}.json:
+    servers:
+      - url: https://api.twilio.com
+    get:
+      summary: Fetch message
+      description: Fetch a message belonging to the account used to make the request
+      tags:
+        - Messages
+      parameters:
+        - name: AccountSid
+          in: path
+          description: The SID of the Account that created the Message resource to fetch
+          required: true
+          schema:
+            type: string
+            minLength: 34
+            maxLength: 34
+            pattern: ^AC[0-9a-fA-F]{32}$
+        - name: Sid
+          in: path
+          description: The SID of the Message resource to fetch
+          required: true
+          schema:
+            type: string
+            minLength: 34
+            maxLength: 34
+            pattern: ^MM[0-9a-fA-F]{32}$
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+
+  # Core API - Calls
+  /2010-04-01/Accounts/{AccountSid}/Calls.json:
+    servers:
+      - url: https://api.twilio.com
+    get:
+      summary: List calls
+      description: Retrieve a list of calls
+      tags:
+        - Calls
+      parameters:
+        - name: AccountSid
+          in: path
+          description: The SID of the Account that created the Call resources to read
+          required: true
+          schema:
+            type: string
+            minLength: 34
+            maxLength: 34
+            pattern: ^AC[0-9a-fA-F]{32}$
+        - name: To
+          in: query
+          description: Only show calls made to this phone number or Client identifier
+          schema:
+            type: string
+        - name: From
+          in: query
+          description: Only show calls made from this phone number or Client identifier
+          schema:
+            type: string
+        - name: Status
+          in: query
+          description: The status of the calls to read
+          schema:
+            type: string
+            enum:
+              - queued
+              - ringing
+              - in-progress
+              - canceled
+              - completed
+              - failed
+              - busy
+              - no-answer
+        - name: StartTime
+          in: query
+          description: Only show calls that started on this date
+          schema:
+            type: string
+            format: date
+        - name: EndTime
+          in: query
+          description: Only show calls that ended on this date
+          schema:
+            type: string
+            format: date
+        - name: PageSize
+          in: query
+          description: How many resources to return in each list page
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  calls:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Call'
+                  first_page_uri:
+                    type: string
+                  next_page_uri:
+                    type: string
+                  page:
+                    type: integer
+                  page_size:
+                    type: integer
+                  uri:
+                    type: string
+    post:
+      summary: Create call
+      description: Make a call
+      tags:
+        - Calls
+      parameters:
+        - name: AccountSid
+          in: path
+          description: The SID of the Account that will create the resource
+          required: true
+          schema:
+            type: string
+            minLength: 34
+            maxLength: 34
+            pattern: ^AC[0-9a-fA-F]{32}$
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                To:
+                  type: string
+                  description: The phone number or client identifier to call
+                From:
+                  type: string
+                  description: The Twilio number or client identifier to use as the caller ID
+                Url:
+                  type: string
+                  format: uri
+                  description: The absolute URL that returns TwiML for this call
+                ApplicationSid:
+                  type: string
+                  description: The SID of the Application resource that will handle this call
+                Method:
+                  type: string
+                  enum:
+                    - HEAD
+                    - GET
+                    - POST
+                    - PATCH
+                    - PUT
+                    - DELETE
+                  description: The HTTP method to use to call the URL
+                FallbackUrl:
+                  type: string
+                  format: uri
+                  description: The URL that Twilio will request if an error occurs
+                StatusCallback:
+                  type: string
+                  format: uri
+                  description: The URL that Twilio will POST to with call status updates
+                Timeout:
+                  type: integer
+                  description: The integer number of seconds that Twilio should wait for an answer
+                Record:
+                  type: boolean
+                  description: Whether to record the call
+              required:
+                - To
+                - From
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Call'
+
+  # Verify API - Services
+  /v2/Services.json:
+    servers:
+      - url: https://verify.twilio.com
+    get:
+      summary: List verification services
+      description: Retrieve a list of verification services
+      tags:
+        - Verify Services
+      parameters:
+        - name: PageSize
+          in: query
+          description: How many resources to return in each list page
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  services:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VerifyService'
+    post:
+      summary: Create verification service
+      description: Create a new verification service
+      tags:
+        - Verify Services
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                FriendlyName:
+                  type: string
+                  description: A descriptive string that you create
+                CodeLength:
+                  type: integer
+                  description: The length of the verification code
+                  minimum: 4
+                  maximum: 10
+                LookupEnabled:
+                  type: boolean
+                  description: Whether to perform a lookup with each verification
+              required:
+                - FriendlyName
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyService'
+
+  # Verify API - Verifications
+  /v2/Services/{ServiceSid}/Verifications.json:
+    servers:
+      - url: https://verify.twilio.com
+    post:
+      summary: Create verification
+      description: Start a new verification
+      tags:
+        - Verifications
+      parameters:
+        - name: ServiceSid
+          in: path
+          description: The SID of the verification Service to create the resource under
+          required: true
+          schema:
+            type: string
+            minLength: 34
+            maxLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                To:
+                  type: string
+                  description: The phone number to verify
+                Channel:
+                  type: string
+                  enum:
+                    - sms
+                    - call
+                    - email
+                    - whatsapp
+                  description: The verification method to use
+                CustomFriendlyName:
+                  type: string
+                  description: A custom user defined friendly name
+                CustomMessage:
+                  type: string
+                  description: The text of a custom message to use for the verification
+                SendDigits:
+                  type: string
+                  description: The digits to send after a phone call is answered
+                Locale:
+                  type: string
+                  description: The locale to use for the verification SMS or call
+                CustomCode:
+                  type: string
+                  description: A pre-generated code to use for verification
+              required:
+                - To
+                - Channel
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Verification'
+
+  # Verify API - Verification Check
+  /v2/Services/{ServiceSid}/VerificationCheck.json:
+    servers:
+      - url: https://verify.twilio.com
+    post:
+      summary: Create verification check
+      description: Check a verification
+      tags:
+        - Verification Check
+      parameters:
+        - name: ServiceSid
+          in: path
+          description: The SID of the verification Service to create the resource under
+          required: true
+          schema:
+            type: string
+            minLength: 34
+            maxLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                To:
+                  type: string
+                  description: The phone number to verify
+                Code:
+                  type: string
+                  description: The 4-10 character string being verified
+                VerificationSid:
+                  type: string
+                  description: A SID that uniquely identifies the Verification resource to check
+              required:
+                - Code
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationCheck'
+
+  # Lookups API - Phone Numbers
+  /v2/PhoneNumbers/{PhoneNumber}:
+    servers:
+      - url: https://lookups.twilio.com
+    get:
+      summary: Lookup phone number
+      description: Look up phone number information
+      tags:
+        - Phone Number Lookup
+      parameters:
+        - name: PhoneNumber
+          in: path
+          description: The phone number to lookup in E.164 format
+          required: true
+          schema:
+            type: string
+        - name: Fields
+          in: query
+          description: The comma-separated list of fields to return
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - caller_name
+                - sim_swap
+                - call_forwarding
+                - line_status
+                - line_type_intelligence
+                - identity_match
+                - reassigned_number
+                - sms_pumping_risk
+                - phone_number_quality_score
+                - pre_fill
+        - name: CountryCode
+          in: query
+          description: The ISO country code of the phone number
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 2
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhoneNumberLookup'
+
+  # Conversations API - Conversations
+  /v1/Conversations.json:
+    servers:
+      - url: https://conversations.twilio.com
+    get:
+      summary: List conversations
+      description: Retrieve a list of conversations in your account's conversation service
+      tags:
+        - Conversations
+      parameters:
+        - name: StartDate
+          in: query
+          description: Only list conversations that started on or after this date
+          schema:
+            type: string
+            format: date
+        - name: EndDate
+          in: query
+          description: Only list conversations that started on or before this date
+          schema:
+            type: string
+            format: date
+        - name: State
+          in: query
+          description: Only list conversations that have this conversation state
+          schema:
+            type: string
+            enum:
+              - inactive
+              - active
+              - closed
+        - name: PageSize
+          in: query
+          description: How many resources to return in each list page
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  conversations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Conversation'
+    post:
+      summary: Create conversation
+      description: Create a new conversation
+      tags:
+        - Conversations
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                FriendlyName:
+                  type: string
+                  description: The human-readable name of this conversation
+                UniqueName:
+                  type: string
+                  description: An application-defined string that uniquely identifies the resource
+                Attributes:
+                  type: string
+                  description: The JSON string that stores application-specific data
+                MessagingServiceSid:
+                  type: string
+                  description: The SID of the Messaging Service used for this conversation
+                State:
+                  type: string
+                  enum:
+                    - inactive
+                    - active
+                    - closed
+                  description: The initial state of the new conversation
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+
+  # Messaging API - Services
+  /v1/Services.json:
+    servers:
+      - url: https://messaging.twilio.com
+    get:
+      summary: List messaging services
+      description: Retrieve a list of messaging services
+      tags:
+        - Messaging Services
+      parameters:
+        - name: PageSize
+          in: query
+          description: How many resources to return in each list page
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  services:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MessagingService'
+    post:
+      summary: Create messaging service
+      description: Create a new messaging service
+      tags:
+        - Messaging Services
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                FriendlyName:
+                  type: string
+                  description: A descriptive string that you create
+                InboundRequestUrl:
+                  type: string
+                  format: uri
+                  description: The URL that will receive inbound messages
+                InboundMethod:
+                  type: string
+                  enum:
+                    - HEAD
+                    - GET
+                    - POST
+                    - PATCH
+                    - PUT
+                    - DELETE
+                  description: The HTTP method to use for inbound messages
+                FallbackUrl:
+                  type: string
+                  format: uri
+                  description: The URL that Twilio will request if InboundRequestUrl fails
+                StatusCallback:
+                  type: string
+                  format: uri
+                  description: The URL that will receive status callbacks
+                StickySender:
+                  type: boolean
+                  description: Whether to enable Sticky Sender on the Service instance
+                MmsConverter:
+                  type: boolean
+                  description: Whether to enable the MMS Converter for messages sent through the Service instance
+                SmartEncoding:
+                  type: boolean
+                  description: Whether to enable Encoding for messages sent through the Service instance
+                ScanMessageContent:
+                  type: string
+                  enum:
+                    - inherit
+                    - enable
+                    - disable
+                  description: Whether to scan inbound messages for sensitive content
+                FallbackToLongCode:
+                  type: boolean
+                  description: Whether to enable Fallback to Long Code for messages sent through the Service instance
+                AreaCodeGeomatch:
+                  type: boolean
+                  description: Whether to enable Area Code Geomatch on the Service Instance
+                ValidityPeriod:
+                  type: integer
+                  description: How long in seconds the service will keep messages
+                SynchronousValidation:
+                  type: boolean
+                  description: Whether to enable Synchronous Validation on the Service Instance
+              required:
+                - FriendlyName
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessagingService'
+
+tags:
+  - name: Accounts
+    description: Twilio accounts and subaccounts
+  - name: Messages
+    description: SMS and MMS messaging
+  - name: Calls
+    description: Voice calls
+  - name: Verify Services
+    description: Phone number verification services
+  - name: Verifications
+    description: Phone number verifications
+  - name: Verification Check
+    description: Verification code checking
+  - name: Phone Number Lookup
+    description: Phone number information lookup
+  - name: Conversations
+    description: Chat conversations
+  - name: Messaging Services
+    description: Advanced messaging services
