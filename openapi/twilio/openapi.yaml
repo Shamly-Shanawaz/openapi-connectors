@@ -28,7 +28,7 @@ servers:
 
 components:
   securitySchemes:
-    accountSid_authToken:
+    apiKey:
       scheme: basic
       type: http
 
@@ -1097,7 +1097,7 @@ components:
           description: The status of the phone number
 
 security:
-  - accountSid_authToken: []
+  - apiKey: []
 
 paths:
   # Core API - Account Management
@@ -1572,7 +1572,7 @@ paths:
                     type: string
                     format: uri
       security:
-        - accountSid_authToken: []
+        - apiKey: []
     post:
       operationId: CreateIncomingPhoneNumber
       summary: Purchase phone number
@@ -1722,7 +1722,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/IncomingPhoneNumber'
       security:
-        - accountSid_authToken: []
+        - apiKey: []
 
   /2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{Sid}.json:
     servers:
@@ -1760,7 +1760,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/IncomingPhoneNumber'
       security:
-        - accountSid_authToken: []
+        - apiKey: []
     post:
       operationId: UpdateIncomingPhoneNumber
       summary: Update incoming phone number
@@ -1900,7 +1900,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/IncomingPhoneNumber'
       security:
-        - accountSid_authToken: []
+        - apiKey: []
     delete:
       operationId: DeleteIncomingPhoneNumber
       summary: Delete incoming phone number
@@ -1930,7 +1930,7 @@ paths:
         '204':
           description: The resource was deleted successfully
       security:
-        - accountSid_authToken: []
+        - apiKey: []
 
   # Verify API - Services
   /v2/Services.json:
