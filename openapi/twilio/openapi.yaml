@@ -15,16 +15,6 @@ info:
 servers:
   - url: https://api.twilio.com
     description: Core Twilio API
-  - url: https://messaging.twilio.com
-    description: Twilio Messaging API
-  - url: https://voice.twilio.com
-    description: Twilio Voice API
-  - url: https://verify.twilio.com
-    description: Twilio Verify API
-  - url: https://conversations.twilio.com
-    description: Twilio Conversations API
-  - url: https://lookups.twilio.com
-    description: Twilio Lookups API
 
 components:
   securitySchemes:
@@ -1102,8 +1092,6 @@ security:
 paths:
   # Core API - Account Management
   /2010-04-01/Accounts.json:
-    servers:
-      - url: https://api.twilio.com
     get:
       operationId: listAccounts
       summary: List accounts
@@ -1157,8 +1145,6 @@ paths:
                 $ref: '#/components/schemas/Account'
 
   /2010-04-01/Accounts/{AccountSid}.json:
-    servers:
-      - url: https://api.twilio.com
     get:
       summary: Fetch account
       description: Fetch the account specified by the provided Account SID
@@ -1184,8 +1170,6 @@ paths:
 
   # Core API - Messages
   /2010-04-01/Accounts/{AccountSid}/Messages.json:
-    servers:
-      - url: https://api.twilio.com
     get:
       summary: List messages
       description: Retrieve a list of messages
@@ -1306,8 +1290,6 @@ paths:
                 $ref: '#/components/schemas/Message'
 
   /2010-04-01/Accounts/{AccountSid}/Messages/{Sid}.json:
-    servers:
-      - url: https://api.twilio.com
     get:
       summary: Fetch message
       description: Fetch a message belonging to the account used to make the request
@@ -1342,8 +1324,6 @@ paths:
 
   # Core API - Calls
   /2010-04-01/Accounts/{AccountSid}/Calls.json:
-    servers:
-      - url: https://api.twilio.com
     get:
       summary: List calls
       description: Retrieve a list of calls
@@ -1495,8 +1475,6 @@ paths:
 
   # Core API - Incoming Phone Numbers
   /2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers.json:
-    servers:
-      - url: https://api.twilio.com
     get:
       operationId: ListIncomingPhoneNumber
       summary: List incoming phone numbers
@@ -1725,8 +1703,6 @@ paths:
         - apiKey: []
 
   /2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{Sid}.json:
-    servers:
-      - url: https://api.twilio.com
     get:
       operationId: FetchIncomingPhoneNumber
       summary: Fetch incoming phone number
@@ -1934,8 +1910,6 @@ paths:
 
   # Verify API - Services
   /v2/Services.json:
-    servers:
-      - url: https://verify.twilio.com
     get:
       summary: List verification services
       description: Retrieve a list of verification services
@@ -1995,8 +1969,6 @@ paths:
 
   # Verify API - Verifications
   /v2/Services/{ServiceSid}/Verifications.json:
-    servers:
-      - url: https://verify.twilio.com
     post:
       summary: Create verification
       description: Start a new verification
@@ -2057,8 +2029,6 @@ paths:
 
   # Verify API - Verification Check
   /v2/Services/{ServiceSid}/VerificationCheck.json:
-    servers:
-      - url: https://verify.twilio.com
     post:
       summary: Create verification check
       description: Check a verification
@@ -2101,8 +2071,6 @@ paths:
 
   # Lookups API - Phone Numbers
   /v2/PhoneNumbers/{PhoneNumber}:
-    servers:
-      - url: https://lookups.twilio.com
     get:
       summary: Lookup phone number
       description: Look up phone number information
@@ -2150,8 +2118,6 @@ paths:
 
   # Conversations API - Conversations
   /v1/Conversations.json:
-    servers:
-      - url: https://conversations.twilio.com
     get:
       summary: List conversations
       description: Retrieve a list of conversations in your account's conversation service
@@ -2238,8 +2204,6 @@ paths:
 
   # Messaging API - Services
   /v1/Services.json:
-    servers:
-      - url: https://messaging.twilio.com
     get:
       summary: List messaging services
       description: Retrieve a list of messaging services
