@@ -10,7 +10,7 @@ info:
       description: AI and LLM APIs
 
 servers:
-  - url: https://api.anthropic.com/v1
+  - url: https://api.anthropic.com
 
 components:
   securitySchemes:
@@ -24,12 +24,12 @@ components:
     AnthropicVersionHeader:
       in: header
       name: anthropic-version
-      description: The version of the Anthropic API you want to use. Required header for all API requests. Must be set to '2023-06-01'.
+      description: The version of the Anthropic API you want to use. Required header for all API requests. Must be set to "2023-06-01".
       required: true
       schema:
         type: string
-        enum: 
-          - '2023-06-01'
+        enum:
+          - "2023-06-01"
 
     AnthropicBetaHeader:
       in: header
@@ -40,19 +40,19 @@ components:
         type: array
         items:
           type: string
-          enum: 
-            - 'computer-use-2024-10-22'
-            - 'computer-use-2025-01-24'
-            - 'output-128k-2025-02-19'
-            - 'token-efficient-tools-2025-02-19'
-            - 'prompt-tools-2025-04-02'
-            - 'interleaved-thinking-2025-05-14'
-            - 'files-api-2025-04-14'
+          enum:
+            - "computer-use-2024-10-22"
+            - "computer-use-2025-01-24"
+            - "output-128k-2025-02-19"
+            - "token-efficient-tools-2025-02-19"
+            - "prompt-tools-2025-04-02"
+            - "interleaved-thinking-2025-05-14"
+            - "files-api-2025-04-14"
 
     AnthropicDangerousDirectBrowserAccessHeader:
       in: header
       name: anthropic-dangerous-direct-browser-access
-      description: Required header to enable direct browser access for web search tools. This is a dangerous feature that allows the model to access the internet directly, which can lead to unexpected behavior. Use with caution.
+      description: This header must be set to "true" to enable direct client-side (browser) access to the API. This acknowledges the security risks of exposing your API key and is not recommended for production environments.
       required: false
       schema:
         type: boolean
@@ -148,60 +148,60 @@ components:
       description: The maximum number of requests allowed within any rate limit period.
       schema:
         type: integer
-    
+
     AnthropicRateLimitRequestsRemaining:
       description: The number of requests remaining before being rate limited.
       schema:
         type: integer
-    
+
     AnthropicRateLimitRequestsReset:
       description: The time when the request rate limit will reset, provided in RFC 3339 format.
       schema:
         type: string
         format: date-time
-    
+
     AnthropicRateLimitTokensLimit:
       description: The maximum number of tokens allowed within any rate limit period.
       schema:
         type: integer
-    
+
     AnthropicRateLimitTokensRemaining:
       description: The number of tokens remaining (rounded to the nearest thousand) before being rate limited.
       schema:
         type: integer
-    
+
     AnthropicRateLimitTokensReset:
       description: The time when the token rate limit will reset, provided in RFC 3339 format.
       schema:
         type: string
         format: date-time
-    
+
     AnthropicRateLimitInputTokensLimit:
       description: The maximum number of input tokens allowed within any rate limit period.
       schema:
         type: integer
-    
+
     AnthropicRateLimitInputTokensRemaining:
       description: The number of input tokens remaining (rounded to the nearest thousand) before being rate limited.
       schema:
         type: integer
-    
+
     AnthropicRateLimitInputTokensReset:
       description: The time when the input token rate limit will reset, provided in RFC 3339 format.
       schema:
         type: string
         format: date-time
-    
+
     AnthropicRateLimitOutputTokensLimit:
       description: The maximum number of output tokens allowed within any rate limit period.
       schema:
         type: integer
-    
+
     AnthropicRateLimitOutputTokensRemaining:
       description: The number of output tokens remaining (rounded to the nearest thousand) before being rate limited.
       schema:
         type: integer
-    
+
     AnthropicRateLimitOutputTokensReset:
       description: The time when the output token rate limit will reset, provided in RFC 3339 format.
       schema:
@@ -212,12 +212,12 @@ components:
       description: The maximum number of Priority Tier input tokens allowed within any rate limit period. (Priority Tier only)
       schema:
         type: integer
-    
+
     AnthropicPriorityInputTokensRemaining:
       description: The number of Priority Tier input tokens remaining (rounded to the nearest thousand) before being rate limited. (Priority Tier only)
       schema:
         type: integer
-    
+
     AnthropicPriorityInputTokensReset:
       description: The time when the Priority Tier input token rate limit will be fully replenished, provided in RFC 3339 format. (Priority Tier only)
       schema:
@@ -228,19 +228,19 @@ components:
       description: The maximum number of Priority Tier output tokens allowed within any rate limit period. (Priority Tier only)
       schema:
         type: integer
-    
+
     AnthropicPriorityOutputTokensRemaining:
       description: The number of Priority Tier output tokens remaining (rounded to the nearest thousand) before being rate limited. (Priority Tier only)
       schema:
         type: integer
-    
+
     AnthropicPriorityOutputTokensReset:
       description: The time when the Priority Tier output token rate limit will be fully replenished, provided in RFC 3339 format. (Priority Tier only)
       schema:
         type: string
         format: date-time
 
-  schemas:  
+  schemas:
     CacheControl:
       type: object
       nullable: true
@@ -378,7 +378,7 @@ components:
           type: string
           minLength: 1
           maxLength: 2048
-        
+
     Citations:
       type: array
       nullable: true
@@ -420,7 +420,7 @@ components:
         type:
           type: string
           enum: [web_search_tool_result_error]
-          
+
     WebSearchToolResultObjectArray:
       type: array
       items:
@@ -446,7 +446,7 @@ components:
           url:
             type: string
             minLength: 1
-    
+
     WebSearchToolResult:
       type: object
       required:
@@ -852,7 +852,7 @@ components:
               items:
                 type: object
                 required:
-                  - type  
+                  - type
                 oneOf:
                   - $ref: '#/components/schemas/ServerToolUse'
                   - $ref: '#/components/schemas/WebSearchToolResult'
@@ -1051,7 +1051,7 @@ components:
           enum: [bash_20241022]
         cache_control:
           $ref: '#/components/schemas/CacheControl'
-    
+
     TextEditorTool20241022:
       type: object
       required:
@@ -1066,7 +1066,7 @@ components:
           enum: [text_editor_20241022]
         cache_control:
           $ref: '#/components/schemas/CacheControl'
-    
+
     ComputerUseTool20250124:
       type: object
       required:
@@ -1245,7 +1245,7 @@ components:
         type:
           type: string
           enum: [text]
-        
+
     ToolUseResponse:
       type: object
       required:
@@ -1283,7 +1283,7 @@ components:
         type:
           type: string
           enum: [server_tool_use]
-    
+
     ResponseWebSearchToolResultBlock:
       type: object
       required:
@@ -1448,7 +1448,7 @@ components:
       minLength: 1
       maxLength: 256
       description: The model that will complete your prompt. Must be between 1 and 256 characters.
-    
+
     SystemRequest:
       oneOf:
         - type: string
@@ -1468,19 +1468,19 @@ components:
             citations:
               $ref: '#/components/schemas/Citations'
       description: A system prompt providing context and instructions to Claude, such as specifying a particular goal or role. Can be provided either as a simple string or as a structured object with cache control options.
-    
+
     ThinkingRequest:
       oneOf:
         - $ref: '#/components/schemas/ThinkingEnabled'
         - $ref: '#/components/schemas/ThinkingDisabled'
-    
+
     ToolChoiceRequest:
       oneOf:
         - $ref: '#/components/schemas/ToolChoiceAuto'
         - $ref: '#/components/schemas/ToolChoiceAny'
         - $ref: '#/components/schemas/ToolChoiceTool'
         - $ref: '#/components/schemas/ToolChoiceNone'
-    
+
     ToolsRequest:
       type: array
       items:
@@ -1603,17 +1603,17 @@ components:
           type: string
           enum: [assistant]
           default: assistant
-          description: Conversational role of the generated message. This will always be 'assistant'.
+          description: Conversational role of the generated message. This will always be "assistant".
         stop_reason:
           type: string
           nullable: true
           enum: [end_turn, max_tokens, stop_sequence, tool_use, pause_turn, refusal]
           description: |
             The reason that we stopped. This may be one of the following values:
-            - 'end_turn': the model reached a natural stopping point
-            - 'max_tokens': we exceeded the requested max_tokens or the model's maximum
-            - 'stop_sequence': one of your provided custom stop_sequences was generated
-            - 'tool_use': the model invoked one or more tools
+            - "end_turn": the model reached a natural stopping point
+            - "max_tokens": we exceeded the requested max_tokens or the model's maximum
+            - "stop_sequence": one of your provided custom stop_sequences was generated
+            - "tool_use": the model invoked one or more tools
             
             In non-streaming mode this value is always non-null. In streaming mode, it is null in the message_start event and non-null otherwise.
         stop_sequence:
@@ -1624,10 +1624,10 @@ components:
           type: string
           enum: [message]
           default: message
-          description: Object type. For Messages, this is always 'message'.
+          description: Object type. For Messages, this is always "message".
         usage:
           $ref: '#/components/schemas/Usage'
-    
+
     ModelResponseData:
       type: object
       required:
@@ -1650,7 +1650,7 @@ components:
           type: string
           enum: [model]
           default: model
-          description: Object type. For Models, this is always 'model'.
+          description: Object type. For Models, this is always "model".
 
     FirstId:
       type: string
@@ -1766,7 +1766,7 @@ components:
             - type
           properties:
             message:
-              type: string            # TODO: IN THE FUTURE THIS WILL BE A 'oneOf' of defined error types to specify the error messages
+              type: string            # TODO: IN THE FUTURE THIS WILL BE A "oneOf" of defined error types to specify the error messages
             type:
               type: string
               enum:
@@ -1845,7 +1845,7 @@ components:
           description: Size of the file in bytes
         type:
           type: string
-          enum: [ 'file' ]
+          enum: [ "file" ]
         downloadable:
           type: boolean
           default: false
@@ -1882,7 +1882,7 @@ components:
           type: string
           enum: [user]
           default: user
-          description: Object type. For Users, this is always 'user'.
+          description: Object type. For Users, this is always "user".
 
     AdminInviteData:
       type: object
@@ -1919,8 +1919,8 @@ components:
           type: string
           enum: [invite]
           default: invite
-          description: Object type. For Invites, this is always 'invite'.
-        
+          description: Object type. For Invites, this is always "invite".
+
     AdminWorkspaceData:
       type: object
       required:
@@ -1961,7 +1961,7 @@ components:
           type: string
           enum: [workspace_member]
           default: workspace_member
-          description: Object type. For Workspace Members, this is always 'workspace_member'.
+          description: Object type. For Workspace Members, this is always "workspace_member".
         user_id:
           type: string
           description: ID of the User.
@@ -2019,12 +2019,12 @@ components:
           type: string
           enum: [api_key]
           default: api_key
-          description: Object type. For API Keys, this is always 'api_key'.
+          description: Object type. For API Keys, this is always "api_key".
         workspace_id:
           type: string
           nullable: true
           description: ID of the Workspace associated with the API key, or null if the API key belongs to the default Workspace.
-        
+
     Error:
       type: object
       required:
@@ -2061,35 +2061,35 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    
+
     Error401:
       description: Authentication Error - There's an issue with your API key
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    
+
     Error403:
       description: Permission Error - Your API key does not have permission to use the specified resource
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    
+
     Error404:
       description: Not Found Error - The requested resource was not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    
+
     Error413:
       description: Request Too Large - Request exceeds the maximum allowed number of bytes
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    
+
     Error429:
       description: Rate Limit Error - Your account has hit a rate limit
       headers:
@@ -2099,14 +2099,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    
+
     Error500:
       description: API Error - An unexpected error has occurred internal to Anthropic's systems
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    
+
     Error529:
       description: Overloaded Error - Anthropic's API is temporarily overloaded
       content:
@@ -2115,7 +2115,7 @@ components:
             $ref: '#/components/schemas/Error'
 
 paths:
-  /messages:
+  /v1/messages:
     post:
       tags:
         - Messages
@@ -2199,7 +2199,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /messages/count_tokens:
+  /v1/messages/count_tokens:
     post:
       tags:
         - Messages
@@ -2270,7 +2270,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /models:
+  /v1/models:
     get:
       tags:
         - Models
@@ -2280,10 +2280,10 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BeforeId'
         - $ref: '#/components/parameters/AfterId'
         - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: Successfully retrieved models
@@ -2330,7 +2330,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /models/{model_id}:
+  /v1/models/{model_id}:
     get:
       tags:
         - Models
@@ -2377,7 +2377,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /messages/batches:
+  /v1/messages/batches:
     post:
       tags:
         - Message Batches
@@ -2485,10 +2485,10 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BeforeId'
         - $ref: '#/components/parameters/AfterId'
         - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: Successfully retrieved message batches
@@ -2522,7 +2522,7 @@ paths:
                     description: First ID in the data list. Can be used as the before_id for the previous page.
                   last_id:
                     type: string
-                    nullable: true 
+                    nullable: true
                     description: Last ID in the data list. Can be used as the after_id for the next page.
         '400':
           $ref: '#/components/responses/Error400'
@@ -2540,7 +2540,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /messages/batches/{message_batch_id}:
+  /v1/messages/batches/{message_batch_id}:
     get:
       tags:
         - Message Batches
@@ -2549,8 +2549,8 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BatchId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: Successfully retrieved message batch
@@ -2589,8 +2589,8 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BatchId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: Successfully deleted message batch
@@ -2630,7 +2630,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /messages/batches/{message_batch_id}/results:
+  /v1/messages/batches/{message_batch_id}/results:
     get:
       tags:
         - Message Batches
@@ -2639,8 +2639,8 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BatchId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: Successfully retrieved batch results
@@ -2684,7 +2684,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /messages/batches/{message_batch_id}/cancel:
+  /v1/messages/batches/{message_batch_id}/cancel:
     post:
       tags:
         - Message Batches
@@ -2694,8 +2694,8 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BatchId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: Successfully initiated batch cancellation
@@ -2726,7 +2726,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /files:       # Currently in beta, Beta headers will be removed in the future
+  /v1/files:       # Currently in beta, Beta headers will be removed in the future
     post:
       tags:
         - Files
@@ -2736,8 +2736,8 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/AnthropicBetaHeader'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       requestBody:
         required: true
         content:
@@ -2791,10 +2791,10 @@ paths:
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
         - $ref: '#/components/parameters/AnthropicBetaHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BeforeId'
         - $ref: '#/components/parameters/AfterId'
         - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: Files retrieved successfully
@@ -2838,7 +2838,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /files/{file_id}:
+  /v1/files/{file_id}:
     get:
       tags:
         - Files
@@ -2849,8 +2849,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
         - $ref: '#/components/parameters/AnthropicBetaHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/FileId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: File retrieved successfully
@@ -2891,8 +2891,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
         - $ref: '#/components/parameters/AnthropicBetaHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/FileId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: File deleted successfully
@@ -2915,7 +2915,7 @@ paths:
                     description: ID of the deleted File.
                   type:
                     type: string
-                    enum: ['file_deleted']
+                    enum: ["file_deleted"]
         '400':
           $ref: '#/components/responses/Error400'
         '401':
@@ -2932,7 +2932,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /files/{file_id}/content:
+  /v1/files/{file_id}/content:
     get:
       tags:
         - Files
@@ -2943,8 +2943,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
         - $ref: '#/components/parameters/AnthropicBetaHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/FileId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: File content retrieved successfully
@@ -2976,7 +2976,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /organizations/users:
+  /v1/organizations/users:
     get:
       tags:
         - Admin - Organization Member Management
@@ -2986,10 +2986,10 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BeforeId'
         - $ref: '#/components/parameters/AfterId'
         - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - name: email
           in: query
           schema:
@@ -3041,7 +3041,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /organizations/users/{user_id}:
+  /v1/organizations/users/{user_id}:
     get:
       tags:
         - Admin - Organization Member Management
@@ -3051,8 +3051,8 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: User details retrieved successfully
@@ -3092,8 +3092,8 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       requestBody:
         required: true
         content:
@@ -3106,7 +3106,7 @@ paths:
                 role:
                   type: string
                   enum: [user, developer, billing]
-                  description: New role for the User. Cannot be 'admin'.
+                  description: New role for the User. Cannot be "admin".
       responses:
         '200':
           description: User updated successfully
@@ -3146,8 +3146,8 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: User successfully removed
@@ -3173,7 +3173,7 @@ paths:
                     type: string
                     enum: [user_deleted]
                     default: user_deleted
-                    description: Object type. For deleted Users, this is always 'user_deleted'.
+                    description: Object type. For deleted Users, this is always "user_deleted".
         '400':
           $ref: '#/components/responses/Error400'
         '401':
@@ -3190,7 +3190,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /organizations/invites:
+  /v1/organizations/invites:
     get:
       tags:
         - Admin - Organization Invites
@@ -3200,10 +3200,10 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BeforeId'
         - $ref: '#/components/parameters/AfterId'
         - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: Invites retrieved successfully
@@ -3273,7 +3273,7 @@ paths:
                 role:
                   type: string
                   enum: [user, developer, billing]
-                  description: Role for the invited User. Cannot be 'admin'.
+                  description: Role for the invited User. Cannot be "admin".
       responses:
         '200':
           description: Invite created successfully
@@ -3304,7 +3304,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /organizations/invites/{invite_id}:
+  /v1/organizations/invites/{invite_id}:
     get:
       tags:
         - Admin - Organization Invites
@@ -3314,8 +3314,8 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/InviteId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: Invite details retrieved successfully
@@ -3355,8 +3355,8 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/InviteId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: Invite deleted successfully
@@ -3382,7 +3382,7 @@ paths:
                     type: string
                     enum: [invite_deleted]
                     default: invite_deleted
-                    description: Deleted object type. For Invites, this is always 'invite_deleted'.
+                    description: Deleted object type. For Invites, this is always "invite_deleted".
         '400':
           $ref: '#/components/responses/Error400'
         '401':
@@ -3399,7 +3399,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /organizations/workspaces:
+  /v1/organizations/workspaces:
     get:
       tags:
         - Admin - Workspace Management
@@ -3409,7 +3409,6 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - name: include_archived
           in: query
           schema:
@@ -3419,6 +3418,7 @@ paths:
         - $ref: '#/components/parameters/BeforeId'
         - $ref: '#/components/parameters/AfterId'
         - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: Workspaces retrieved successfully
@@ -3516,7 +3516,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /organizations/workspaces/{workspace_id}:
+  /v1/organizations/workspaces/{workspace_id}:
     get:
       tags:
         - Admin - Workspace Management
@@ -3526,8 +3526,8 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/WorkspaceId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: Workspace details retrieved successfully
@@ -3567,8 +3567,8 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/WorkspaceId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       requestBody:
         required: true
         content:
@@ -3613,7 +3613,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /organizations/workspaces/{workspace_id}/archive:
+  /v1/organizations/workspaces/{workspace_id}/archive:
     post:
       tags:
         - Admin - Workspace Management
@@ -3623,8 +3623,8 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/WorkspaceId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: Workspace archived successfully
@@ -3655,7 +3655,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /organizations/workspaces/{workspace_id}/members:
+  /v1/organizations/workspaces/{workspace_id}/members:
     get:
       tags:
         - Admin - Workspace Member Management
@@ -3665,11 +3665,11 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/WorkspaceId'
         - $ref: '#/components/parameters/BeforeId'
         - $ref: '#/components/parameters/AfterId'
         - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: Workspace members retrieved successfully
@@ -3725,8 +3725,8 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/WorkspaceId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       requestBody:
         required: true
         content:
@@ -3743,7 +3743,7 @@ paths:
                 workspace_role:
                   type: string
                   enum: [workspace_user, workspace_developer, workspace_admin]
-                  description: Role of the new Workspace Member. Cannot be 'workspace_billing'.
+                  description: Role of the new Workspace Member. Cannot be "workspace_billing".
       responses:
         '200':
           description: Workspace member created successfully
@@ -3774,7 +3774,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /organizations/workspaces/{workspace_id}/members/{user_id}:
+  /v1/organizations/workspaces/{workspace_id}/members/{user_id}:
     get:
       tags:
         - Admin - Workspace Member Management
@@ -3784,9 +3784,9 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/WorkspaceId'
         - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: Workspace member details retrieved successfully
@@ -3826,9 +3826,9 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/WorkspaceId'
         - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       requestBody:
         required: true
         content:
@@ -3881,9 +3881,9 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/WorkspaceId'
         - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: Workspace member successfully removed
@@ -3907,7 +3907,7 @@ paths:
                     type: string
                     enum: [workspace_member_deleted]
                     default: workspace_member_deleted
-                    description: Deleted object type. For Workspace Members, this is always 'workspace_member_deleted'.
+                    description: Deleted object type. For Workspace Members, this is always "workspace_member_deleted".
                   user_id:
                     type: string
                     description: ID of the User.
@@ -3930,7 +3930,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /organizations/api_keys:
+  /v1/organizations/api_keys:
     get:
       tags:
         - Admin - API Keys
@@ -3940,10 +3940,10 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/BeforeId'
         - $ref: '#/components/parameters/AfterId'
         - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - name: status
           in: query
           schema:
@@ -4009,7 +4009,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /organizations/api_keys/{api_key_id}:
+  /v1/organizations/api_keys/{api_key_id}:
     get:
       tags:
         - Admin - API Keys
@@ -4019,8 +4019,8 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/ApiKeyId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       responses:
         '200':
           description: API key details retrieved successfully
@@ -4060,8 +4060,8 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AnthropicVersionHeader'
-        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
         - $ref: '#/components/parameters/ApiKeyId'
+        - $ref: '#/components/parameters/AnthropicDangerousDirectBrowserAccessHeader'
       requestBody:
         required: true
         content:
@@ -4109,7 +4109,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /experimental/generate_prompt:
+  /v1/experimental/generate_prompt:
     post:
       tags:
         - Experimental - Prompt Tools
@@ -4199,8 +4199,8 @@ paths:
                       $ref: '#/components/schemas/Message'
                   system:
                     type: string
-                    default: ''
-                    description: Currently, the system field is always returned as an empty string (''). In future iterations, this field may contain generated system prompts. Directions similar to what would normally be included in a system prompt are included in messages when generating a prompt.
+                    default: ""
+                    description: Currently, the system field is always returned as an empty string (""). In future iterations, this field may contain generated system prompts. Directions similar to what would normally be included in a system prompt are included in messages when generating a prompt.
                   usage:
                     $ref: '#/components/schemas/Usage'
         '400':
@@ -4219,7 +4219,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /experimental/improve_prompt:
+  /v1/experimental/improve_prompt:
     post:
       tags:
         - Experimental - Prompt Tools
@@ -4239,16 +4239,16 @@ paths:
                 - message
               properties:
                 messages:
-                    type: array
-                    description: The response contains a list of message objects in the same format used by the Messages API. Typically includes a user message with the complete generated prompt text, and may include an assistant message with a prefill to guide the model's initial response. These messages can be used directly in a Messages API request to start a conversation with the generated prompt.
-                    items:
-                      $ref: '#/components/schemas/Message'
+                  type: array
+                  description: The response contains a list of message objects in the same format used by the Messages API. Typically includes a user message with the complete generated prompt text, and may include an assistant message with a prefill to guide the model's initial response. These messages can be used directly in a Messages API request to start a conversation with the generated prompt.
+                  items:
+                    $ref: '#/components/schemas/Message'
                 feedback:
-                    type: string
-                    nullable: true
+                  type: string
+                  nullable: true
                 system:
-                    type: string
-                    nullable: true
+                  type: string
+                  nullable: true
                 target_model:
                   type: string
                   nullable: true
@@ -4317,8 +4317,8 @@ paths:
                       $ref: '#/components/schemas/Message'
                   system:
                     type: string
-                    default: ''
-                    description: Currently, the system field is always returned as an empty string (''). In future iterations, this field may contain generated system prompts. Directions similar to what would normally be included in a system prompt are included in messages when generating a prompt.
+                    default: ""
+                    description: Currently, the system field is always returned as an empty string (""). In future iterations, this field may contain generated system prompts. Directions similar to what would normally be included in a system prompt are included in messages when generating a prompt.
                   usage:
                     $ref: '#/components/schemas/Usage'
         '400':
@@ -4337,7 +4337,7 @@ paths:
           $ref: '#/components/responses/Error500'
         '529':
           $ref: '#/components/responses/Error529'
-  /experimental/templatize_prompt:
+  /v1/experimental/templatize_prompt:
     post:
       tags:
         - Experimental - Prompt Tools
@@ -4357,13 +4357,13 @@ paths:
                 - message
               properties:
                 messages:
-                    type: array
-                    description: The response contains a list of message objects in the same format used by the Messages API. Typically includes a user message with the complete generated prompt text, and may include an assistant message with a prefill to guide the model's initial response. These messages can be used directly in a Messages API request to start a conversation with the generated prompt.
-                    items:
-                      $ref: '#/components/schemas/Message'
+                  type: array
+                  description: The response contains a list of message objects in the same format used by the Messages API. Typically includes a user message with the complete generated prompt text, and may include an assistant message with a prefill to guide the model's initial response. These messages can be used directly in a Messages API request to start a conversation with the generated prompt.
+                  items:
+                    $ref: '#/components/schemas/Message'
                 system:
-                    type: string
-                    nullable: true
+                  type: string
+                  nullable: true
       responses:
         '200':
           description: Successful response
@@ -4427,8 +4427,8 @@ paths:
                       $ref: '#/components/schemas/Message'
                   system:
                     type: string
-                    default: ''
-                    description: Currently, the system field is always returned as an empty string (''). In future iterations, this field may contain generated system prompts. Directions similar to what would normally be included in a system prompt are included in messages when generating a prompt.
+                    default: ""
+                    description: Currently, the system field is always returned as an empty string (""). In future iterations, this field may contain generated system prompts. Directions similar to what would normally be included in a system prompt are included in messages when generating a prompt.
                   usage:
                     $ref: '#/components/schemas/Usage'
                   variable_values:
